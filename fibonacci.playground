@@ -1,0 +1,71 @@
+// Playground - noun: a place where people can play
+
+import UIKit
+
+class Fibonacci {
+    
+    var sequence:[Int] = []
+    
+    func doUntil(stop:Int) -> Fibonacci {
+        
+        sequence = (stop == 0) ? [0] : [0,1]
+        
+        while (stop != 0 && self.getNext() <= stop) {
+            setNext()
+        }
+        
+        return self
+    }
+
+    func getLast() -> Int {
+        return sequence.reverse()[0]
+    }
+    
+    func getSequence() -> [Int] {
+        return sequence
+    }
+    
+    func getNext() -> Int {
+        return sequence.reverse()[0] + sequence.reverse()[1]
+    }
+    
+    func setNext() {
+        sequence.append(self.getNext())
+    }
+}
+
+//------------------------------------------------------------------------
+//-----------------               Tests               --------------------
+//------------------------------------------------------------------------
+
+let fibonacci = Fibonacci()
+
+// can handle a zero as a stop value?
+fibonacci.doUntil(0).getLast()
+
+// can handle 1 as a stop value?
+fibonacci.doUntil(1).sequence
+
+// can use 55 as a max number
+fibonacci.doUntil(55).sequence
+
+// zero works again ( instance resets itself )
+fibonacci.doUntil(0).sequence
+
+// can stop at 2,000, and get the highest fibonacci number
+fibonacci.doUntil(2000).sequence
+fibonacci.doUntil(2000).getLast()
+
+// calculate fibonacci until 6000, then tell me the next number in the sequence
+fibonacci.doUntil(6000).getNext()
+
+// calculate until 6000, then get a count of numbers in the sequence
+fibonacci.doUntil(6000).sequence.count
+
+
+
+
+
+
+
+
